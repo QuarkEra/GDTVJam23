@@ -40,6 +40,10 @@ private:
 
 	void CalculateRemainingBunnies();
 
+	FTimerHandle EndGameDelay;
+	void EndGame();
+	void Quit();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

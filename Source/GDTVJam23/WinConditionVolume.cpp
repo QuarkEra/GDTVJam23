@@ -57,7 +57,18 @@ void AWinConditionVolume::CalculateRemainingBunnies()
 	if (BunniesRemain == 1)
  	{
  		UE_LOG(LogTemp, Display, TEXT("Bunnies Remaining %i" ), BunniesRemain);
+		EndGame();
  	}
+}
+
+void AWinConditionVolume::EndGame()
+{
+	GetWorldTimerManager().SetTimer(EndGameDelay, this, &AWinConditionVolume::Quit, 3.0f, false, 3.0f);
+}
+
+void AWinConditionVolume::Quit()
+{
+	UKismetSystemLibrary::QuitGame(this, GetWorld()->GetFirstPlayerController(), EQuitPreference::Quit, true);
 }
 
 // Called every frame
