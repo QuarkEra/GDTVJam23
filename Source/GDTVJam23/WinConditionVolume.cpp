@@ -63,12 +63,12 @@ void AWinConditionVolume::CalculateRemainingBunnies()
 
 void AWinConditionVolume::EndGame()
 {
-	GetWorldTimerManager().SetTimer(EndGameDelay, this, &AWinConditionVolume::Quit, 3.0f, false, 3.0f);
+	GetWorldTimerManager().SetTimer(EndGameDelay, this, &AWinConditionVolume::MoveToEndCreditsScene, 3.0f, false, 3.0f);
 }
 
-void AWinConditionVolume::Quit()
+void AWinConditionVolume::MoveToEndCreditsScene()
 {
-	UKismetSystemLibrary::QuitGame(this, GetWorld()->GetFirstPlayerController(), EQuitPreference::Quit, true);
+	UGameplayStatics::OpenLevel(this, EndCredit, true);
 }
 
 // Called every frame

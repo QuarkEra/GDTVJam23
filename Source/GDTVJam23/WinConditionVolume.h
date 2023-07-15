@@ -42,7 +42,8 @@ private:
 
 	FTimerHandle EndGameDelay;
 	void EndGame();
-	void Quit();
+	FName EndCredit = "/Game/Maps/EndCredit.EndCredit";
+	void MoveToEndCreditsScene();
 
 public:	
 	// Called every frame
