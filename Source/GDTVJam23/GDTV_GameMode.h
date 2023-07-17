@@ -13,5 +13,13 @@ UCLASS()
 class GDTVJAM23_API AGDTV_GameMode : public AGameModeBase
 {
 	GENERATED_BODY()
+
+public:
+	UFUNCTION()
+	void EndGame();
+	FTimerHandle EndGameDelay;
+	FName EndCredit = "/Game/Maps/EndCredit.EndCredit";
+	UFUNCTION()
+	void MoveToEndCreditsScene() const;
 	
 };

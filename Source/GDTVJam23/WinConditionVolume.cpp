@@ -4,6 +4,8 @@
 #include "WinConditionVolume.h"
 
 #include "GameFramework/FloatingPawnMovement.h"
+#include "GameFramework/GameModeBase.h"
+#include "GDTV_GameMode.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -17,7 +19,6 @@ AWinConditionVolume::AWinConditionVolume()
 	RootComponent = BoxComponent;
 
 	BoxComponent->OnComponentBeginOverlap.AddDynamic(this, &AWinConditionVolume::OnBoxBeginOverlap);
-
 	
 }
 
@@ -56,19 +57,13 @@ void AWinConditionVolume::CalculateRemainingBunnies()
 {
 	if (BunniesRemain == 1)
  	{
- 		UE_LOG(LogTemp, Display, TEXT("Bunnies Remaining %i" ), BunniesRemain);
-		EndGame();
+		AGDTV_GameMode* GM = Cast<AGDTV_GameMode>(GetWorld()->GetAuthGameMode());
+	    if (GM != nullptr)
+	    {
+	    	UE_LOG(LogTemp, Display, TEXT("GM not a nullptr..."));
+		    GM->EndGame();
+	    }
  	}
-}
-
-void AWinConditionVolume::EndGame()
-{
-	GetWorldTimerManager().SetTimer(EndGameDelay, this, &AWinConditionVolume::MoveToEndCreditsScene, 3.0f, false, 3.0f);
-}
-
-void AWinConditionVolume::MoveToEndCreditsScene()
-{
-	UGameplayStatics::OpenLevel(this, EndCredit, true);
 }
 
 // Called every frame

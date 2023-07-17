@@ -36,14 +36,8 @@ private:
 
 	UPROPERTY(EditAnywhere, Category="Gameplay")
 	int32 BunniesRemain = 2;
-
-
+	
 	void CalculateRemainingBunnies();
-
-	FTimerHandle EndGameDelay;
-	void EndGame();
-	FName EndCredit = "/Game/Maps/EndCredit.EndCredit";
-	void MoveToEndCreditsScene();
 
 public:	
 	// Called every frame
