@@ -37,7 +37,7 @@ private:
 	UPROPERTY(EditAnywhere, Category="Gameplay")
 	int32 BunniesRemain = 2;
 	
-	void CalculateRemainingBunnies();
+	void CalculateRemainingBunnies() const;
 
 public:	
 	// Called every frame

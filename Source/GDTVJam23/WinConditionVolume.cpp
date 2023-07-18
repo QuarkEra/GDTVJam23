@@ -4,7 +4,6 @@
 #include "WinConditionVolume.h"
 
 #include "GameFramework/FloatingPawnMovement.h"
-#include "GameFramework/GameModeBase.h"
 #include "GDTV_GameMode.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -32,35 +31,33 @@ void AWinConditionVolume::BeginPlay()
 void AWinConditionVolume::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	AActor* Bunny = OtherActor;
+	const AActor* Bunny = OtherActor;
 	if (Bunny != nullptr)
 	{
 		AController* BunnyAI = Bunny->GetInstigatorController();
-		AController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
+		const AController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
 		if (BunnyAI != nullptr)
 		{
-			APawn* AIPawn = BunnyAI->GetPawn();
+			const APawn* AIPawn = BunnyAI->GetPawn();
 			if (AIPawn != nullptr && BunnyAI != PlayerController)
 			{
 				UPawnMovementComponent* MoveComp = AIPawn->GetMovementComponent();
 				MoveComp->StopMovementImmediately();
 				BunnyAI->UnPossess();
 				BunniesRemain--;
-				UE_LOG(LogTemp, Display, TEXT("Bunnies Remaining %i"), BunniesRemain);
 				CalculateRemainingBunnies();
 			}
 		}
 	}
 }
 
-void AWinConditionVolume::CalculateRemainingBunnies()
+void AWinConditionVolume::CalculateRemainingBunnies() const
 {
 	if (BunniesRemain == 1)
  	{
 		AGDTV_GameMode* GM = Cast<AGDTV_GameMode>(GetWorld()->GetAuthGameMode());
 	    if (GM != nullptr)
 	    {
-	    	UE_LOG(LogTemp, Display, TEXT("GM not a nullptr..."));
 		    GM->EndGame();
 	    }
  	}
