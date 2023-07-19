@@ -23,6 +23,8 @@ protected:
 private:
 	UPROPERTY()
 	USoundCue* BGMusic;
+
+	
 	
 public:
 	UFUNCTION()
@@ -32,5 +34,8 @@ public:
 	FName EndCredit = "/Game/Maps/EndCredit.EndCredit";
 	UFUNCTION()
 	void MoveToEndCreditsScene() const;
+
+	UPROPERTY(EditAnywhere, Category="Gameplay")
+	int32 BunniesRemain = 3;
 	
 };

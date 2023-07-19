@@ -34,13 +34,14 @@ private:
 		const FHitResult& SweepResult
 		);
 
-	UPROPERTY(EditAnywhere, Category="Gameplay")
-	int32 BunniesRemain = 2;
 	
-	void CalculateRemainingBunnies() const;
+	
+	
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void CalculateRemainingBunnies() const;
 
 };

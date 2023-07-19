@@ -44,7 +44,8 @@ void AWinConditionVolume::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedCompo
 				UPawnMovementComponent* MoveComp = AIPawn->GetMovementComponent();
 				MoveComp->StopMovementImmediately();
 				BunnyAI->UnPossess();
-				BunniesRemain--;
+				AGDTV_GameMode* GM = Cast<AGDTV_GameMode>(GetWorld()->GetAuthGameMode());
+				GM->BunniesRemain--;
 				CalculateRemainingBunnies();
 			}
 		}
@@ -53,14 +54,14 @@ void AWinConditionVolume::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedCompo
 
 void AWinConditionVolume::CalculateRemainingBunnies() const
 {
-	if (BunniesRemain == 1)
- 	{
-		AGDTV_GameMode* GM = Cast<AGDTV_GameMode>(GetWorld()->GetAuthGameMode());
-	    if (GM != nullptr)
-	    {
-		    GM->EndGame();
-	    }
- 	}
+	AGDTV_GameMode* GM = Cast<AGDTV_GameMode>(GetWorld()->GetAuthGameMode());
+	if (GM != nullptr)
+	{
+		if (GM->BunniesRemain == 1)
+		{
+			GM->EndGame();			
+		}
+	}
 }
 
 // Called every frame
