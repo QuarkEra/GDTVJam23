@@ -6,7 +6,6 @@
 #include "Components/PointLightComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Actor.h"
-#include "Particles/ParticleEmitter.h"
 #include "Sound/SoundCue.h"
 #include "ALandmine.generated.h"
 
