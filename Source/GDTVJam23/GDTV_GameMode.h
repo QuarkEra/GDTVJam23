@@ -22,20 +22,31 @@ protected:
 
 private:
 	UPROPERTY()
-	USoundCue* BGMusic;
+	USoundCue* BgMusic;
 
-	
+	// set up end game condition without manually updating the bunniesremaining variable
+	UPROPERTY()
+	TArray<AActor*> BunnyArray;
 	
 public:
+	// endgame condition of bunnies to save
+	// made un-editable as the GameMode now calculates number of bunnies in beginplay()
+	UPROPERTY(VisibleAnywhere, Category="Gameplay")
+	int32 BunniesRemain = 0;
+
+	void CheckWinCondition();
+
+	// while this is a one level gamejam game the name endgame is appropriate
 	UFUNCTION()
 	void EndGame();
+	
+	// timer to wait while message is displayed on screen
 	FTimerHandle EndGameDelay;
+	
+	// level to load when timer ends
 	UPROPERTY(EditAnywhere)
 	FName EndCredit = "/Game/Maps/EndCredit.EndCredit";
 	UFUNCTION()
 	void MoveToEndCreditsScene() const;
-
-	UPROPERTY(EditAnywhere, Category="Gameplay")
-	int32 BunniesRemain = 3;
 	
 };

@@ -3,13 +3,14 @@
 
 #include "GDTV_GameMode.h"
 
+#include "AIBunnyCharacter.h"
 #include "Kismet/GameplayStatics.h"
 
 AGDTV_GameMode::AGDTV_GameMode()
 {
 	// setup audio cue for background music
-	static ConstructorHelpers::FObjectFinder<USoundCue> BGAudio(TEXT("/Game/Audio/BG_Music_Cue.BG_Music_Cue"));
-	BGMusic = BGAudio.Object;
+	static ConstructorHelpers::FObjectFinder<USoundCue> BgAudio(TEXT("/Game/Audio/BG_Music_Cue.BG_Music_Cue"));
+	BgMusic = BgAudio.Object;
 }
 
 void AGDTV_GameMode::BeginPlay()
@@ -17,8 +18,29 @@ void AGDTV_GameMode::BeginPlay()
 	Super::BeginPlay();
 
 	// play background music
-	UGameplayStatics::PlaySound2D(this, BGMusic, 1,1, 0);
+	UGameplayStatics::PlaySound2D(this, BgMusic, 1,1, 0);
+	UE_LOG(LogTemp, Display, TEXT("Playing Sound 2D..."));
 	
+	// get child bunnies to save
+	UGameplayStatics::GetAllActorsOfClass(this, AAIBunnyCharacter::StaticClass(), BunnyArray);
+	for (const AActor* Bunny : BunnyArray)
+	{
+		FString BunnyName = Bunny->GetName();
+		BunniesRemain++;
+		UE_LOG(LogTemp, Display, TEXT("Name of Bunny: %s"), *BunnyName);
+	}
+	
+}
+
+void AGDTV_GameMode::CheckWinCondition()
+{
+	// Bunny saved by overlapping home region
+	BunniesRemain--;
+	// when all saved bunnies end the game
+	if (BunniesRemain == 0)
+	{
+		EndGame();
+	}
 }
 
 void AGDTV_GameMode::EndGame()
