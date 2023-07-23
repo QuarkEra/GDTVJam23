@@ -36,7 +36,7 @@ void AGDTV_GameMode::CheckWinCondition()
 {
 	// Bunny saved by overlapping home region
 	BunniesRemain--;
-	// when all saved bunnnies end the game
+	// when all saved bunnies end the game
 	if (BunniesRemain == 0)
 	{
 		EndGame();

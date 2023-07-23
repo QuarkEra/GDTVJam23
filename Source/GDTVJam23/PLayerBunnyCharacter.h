@@ -6,8 +6,6 @@
 #include "BaseBunnyCharacter.h"
 #include "InputAction.h"
 #include "InputMappingContext.h"
-#include "Camera/CameraComponent.h"
-#include "GameFramework/SpringArmComponent.h"
 #include "PLayerBunnyCharacter.generated.h"
 
 /**
@@ -20,10 +18,7 @@ class GDTVJAM23_API APLayerBunnyCharacter : public ABaseBunnyCharacter
 
 public:
 	APLayerBunnyCharacter();
-	
-private:
 
-	
 protected:
 	UPROPERTY(EditAnywhere, Category="Input")
 	const UInputMappingContext* InputMapping;

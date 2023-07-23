@@ -23,17 +23,12 @@ void APLayerBunnyCharacter::Move(const FInputActionValue& Value)
 		{
 			const FVector Direction = MoveRotation.RotateVector(FVector::ForwardVector);
 			AddMovementInput(Direction, MoveValue.Y);
-			UE_LOG(LogTemp,Display,TEXT("MoveValue.Y %f"), MoveValue.Y);
 		}
 		if (MoveValue.X != 0.f)
 		{
 			const FVector Direction = MoveRotation.RotateVector(FVector::RightVector);
 			AddMovementInput(Direction, MoveValue.X);
 		}
-	}
-	else
-	{
-		UE_LOG(LogTemp,Display,TEXT("Null controller"));
 	}
 }
 
@@ -52,10 +47,6 @@ void APLayerBunnyCharacter::Look(const FInputActionValue& Value)
 			AddControllerPitchInput(LookValue.Y);
 		}
 	}
-	else
-	{
-		UE_LOG(LogTemp,Display,TEXT("Null controller"));
-	}	
 }
 
 void APLayerBunnyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -63,7 +54,6 @@ void APLayerBunnyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	UE_LOG(LogTemp,Display,TEXT("Setting up player input"));
 	const APlayerController* PlayerController = Cast<APlayerController>(GetController());
 	if (PlayerController != nullptr)
 	{
